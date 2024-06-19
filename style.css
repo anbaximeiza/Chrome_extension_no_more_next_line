@@ -3,3 +3,9 @@
     width: 28%;
     margin: 2%;
 }
+
+textarea::placeholder {
+    color: rgb(21, 106, 191);
+    font-style: italic;
+
+  }
