@@ -4,20 +4,27 @@ function textProcess(rawText){
     return output;
 }
 
-function readClipBoard(){
+async function readClipBoard(){
     try {
-        let rawText= readText();
+        let rawText= await navigator.clipboard.readText();
+        if (!rawText){
+            throwError("No text in clipboard.");
+            return;
+        }
         writeToClipboard(textProcess(rawText));
     } catch (e) {
-      if (e instanceof NotAllowedError){
+      if (e instanceof DOMException){
         throwError("Unable to access to clipboard, click allow on the top right to access.")
-      } else if(e instanceof NotFoundError){
+      } else if(e .name === "NotFoundError"){
         throwError("No text in clipboard.")
       }
     } 
 }
 
-function throwError(errorMsg){
+
+const errorMsg=document.querySelector("#log");
+function throwError(text){
+    console.log("error");
     errorMsg.innerText = `Error: ${text}`;
 }
 
@@ -30,7 +37,10 @@ document.getElementById("from-web").addEventListener("click", function() {
     textProcess(rawTextValue);
 });
 
-let errorMsg=document.querySelector("#log")
+document.getElementById("from-clipboard").addEventListener("click", function() {
+    readClipBoard();
+});
+
 
 
 
