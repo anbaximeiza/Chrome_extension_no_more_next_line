@@ -34,7 +34,7 @@ function writeToClipboard(textString){
 
 document.getElementById("from-web").addEventListener("click", function() {
     var rawTextValue = document.getElementById("rawText").value;
-    textProcess(rawTextValue);
+    document.getElementById("rawText").value=textProcess(rawTextValue);
 });
 
 document.getElementById("from-clipboard").addEventListener("click", function() {

@@ -1,3 +1,9 @@
+html
+{
+    width: 400px;  /* max: 800px */
+    height: 300px; /* max: 600px */
+}
+
 .actionButtons{
     height: 40px;
     width: 28%;
