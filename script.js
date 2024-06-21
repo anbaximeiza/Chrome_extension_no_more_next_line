@@ -1,9 +1,9 @@
 function textProcess(rawText){
     var output=rawText.replaceAll(/[\n\r]+/g, " ");
-    console.log(output);
     return output;
 }
 
+//in pair with write
 async function readClipBoard(){
     try {
         let rawText= await navigator.clipboard.readText();
@@ -21,26 +21,45 @@ async function readClipBoard(){
     } 
 }
 
+async function writeToClipboard(textString){
+    throwError("");//empty the warning so less annoying
+    await navigator.clipboard.writeText(textString);
+}
 
+//display msg on the extension page
 const errorMsg=document.querySelector("#log");
 function throwError(text){
     console.log("error");
     errorMsg.innerText = `${text}`;
 }
 
-async function writeToClipboard(textString){
-    throwError("");
-    await navigator.clipboard.writeText(textString);
-}
 
+//btn 1
 document.getElementById("from-web").addEventListener("click", function() {
     var rawTextValue = document.getElementById("rawText").value;
     document.getElementById("rawText").value=textProcess(rawTextValue);
 });
-
+//btn 2
 document.getElementById("from-clipboard").addEventListener("click", function() {
         readClipBoard();    
 });
+
+//btn 3
+const btn3 =document.getElementById("hotkey")
+btn3.onclick = turnOn;
+
+//in pair with turn off, switch button and change status in bg
+function turnOn(){
+    chrome.runtime.sendMessage({message: "Enabled"});
+    btn3.innerText = "ShortCut: Ctrl+Alt (status:on)";
+    btn3.onclick = turnOff;
+}
+
+function turnOff(){
+    chrome.runtime.sendMessage({message: "Disabled"});
+    btn3.innerText = "ShortCut: Ctrl+Alt (status:off)";
+    btn3.onclick = turnOn;
+}
 
 
 
