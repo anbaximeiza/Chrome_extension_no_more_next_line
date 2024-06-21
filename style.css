@@ -1,6 +1,6 @@
 html
 {
-    width: 400px;  /* max: 800px */
+    width: 420px;  /* max: 800px */
     height: 300px; /* max: 600px */
 }
 
@@ -14,4 +14,12 @@ textarea::placeholder {
     color: rgb(21, 106, 191);
     font-style: italic;
 
-  }
+}
+
+#steps p{
+    margin: 1.5%;
+}
+
+#steps{
+    margin: 0%;
+}

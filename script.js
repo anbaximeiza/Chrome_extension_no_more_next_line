@@ -14,7 +14,7 @@ async function readClipBoard(){
         writeToClipboard(textProcess(rawText));
     } catch (e) {
       if (e instanceof DOMException){
-        throwError("Unable to access to clipboard, click allow on the top right to access.")
+        throwError("Unable to access to clipboard")
       } else if(e .name === "NotFoundError"){
         throwError("No text in clipboard.")
       }
@@ -25,11 +25,12 @@ async function readClipBoard(){
 const errorMsg=document.querySelector("#log");
 function throwError(text){
     console.log("error");
-    errorMsg.innerText = `Error: ${text}`;
+    errorMsg.innerText = `${text}`;
 }
 
-function writeToClipboard(textString){
-
+async function writeToClipboard(textString){
+    throwError("");
+    await navigator.clipboard.writeText(textString);
 }
 
 document.getElementById("from-web").addEventListener("click", function() {
@@ -38,7 +39,7 @@ document.getElementById("from-web").addEventListener("click", function() {
 });
 
 document.getElementById("from-clipboard").addEventListener("click", function() {
-    readClipBoard();
+        readClipBoard();    
 });
 
 

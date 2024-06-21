@@ -5,5 +5,11 @@
     "version": "1.0",
     "action": {
         "default_popup": "index.html"
-    }
+    },
+    "permissions": [
+        "clipboardRead",
+        "clipboardWrite",
+        "activeTab",
+        "notifications"
+    ]
   }
