@@ -6,10 +6,22 @@
     "action": {
         "default_popup": "index.html"
     },
+    "background": {
+        "service_worker": "background.js"
+    },
     "permissions": [
         "clipboardRead",
         "clipboardWrite",
         "activeTab",
-        "notifications"
-    ]
+        "offscreen",
+        "storage"
+    ],
+    "commands": {
+        "process" : {
+            "suggested_key": {
+                 "windows": "Alt+Z" 
+            },
+            "description": "Procees the text in clipboard."
+        }
   }
+}

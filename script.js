@@ -1,5 +1,19 @@
+document.addEventListener("DOMContentLoaded", function(){
+    let btn3 = document.getElementById("hotkey");
+    let status = chrome.storage.local.get("status", function(result){
+        if (result.status){
+            btn3.innerText = "ShortCut: Ctrl+Alt (status:on)";
+            btn3.onclick=turnOff;
+        }else {
+            btn3.innerText = "ShortCut: Ctrl+Alt (status:off)";
+            btn3.onclick=turnOn;
+        }
+    })
+})
+
 function textProcess(rawText){
     var output=rawText.replaceAll(/[\n\r]+/g, " ");
+    output=output.replaceAll("  "," ");
     return output;
 }
 
@@ -46,18 +60,19 @@ document.getElementById("from-clipboard").addEventListener("click", function() {
 
 //btn 3
 const btn3 =document.getElementById("hotkey")
-btn3.onclick = turnOn;
 
 //in pair with turn off, switch button and change status in bg
 function turnOn(){
     chrome.runtime.sendMessage({message: "Enabled"});
     btn3.innerText = "ShortCut: Ctrl+Alt (status:on)";
+    chrome.storage.local.set({status: true});
     btn3.onclick = turnOff;
 }
 
 function turnOff(){
     chrome.runtime.sendMessage({message: "Disabled"});
     btn3.innerText = "ShortCut: Ctrl+Alt (status:off)";
+    chrome.storage.local.set({status: false});
     btn3.onclick = turnOn;
 }
 
