@@ -1,6 +1,7 @@
 let HKstatus = 'dis';
 
 chrome.runtime.onMessage.addListener(function (request) {
+    //handeling hotkey
     if (request.message === 'Disabled') {
         HKstatus = 'dis';
         console.log(HKstatus)
@@ -21,12 +22,12 @@ async function createOffscreen() {
             reasons: ['CLIPBOARD'],
             justification: 'Handle clipboard processing in the background'
         });
-    } catch (e) {
+    } catch (e) {//ignore the error when already created
         return true;
     }
 }
 
-function turnOff() {
+function turnOff() {//close the offscreen document
     chrome.runtime.sendMessage({ message: "turnOff" });
 }
 

@@ -1,11 +1,14 @@
+textOn="HotKey: Alt+Z (status: On)";
+textOff="HotKey: Alt+Z (status: Off)";
+
 document.addEventListener("DOMContentLoaded", function(){
     let btn3 = document.getElementById("hotkey");
-    let status = chrome.storage.local.get("status", function(result){
+    let status = chrome.storage.session.get("status", function(result){
         if (result.status){
-            btn3.innerText = "ShortCut: Ctrl+Alt (status:on)";
+            btn3.innerText = textOn;
             btn3.onclick=turnOff;
         }else {
-            btn3.innerText = "ShortCut: Ctrl+Alt (status:off)";
+            btn3.innerText = textOff;
             btn3.onclick=turnOn;
         }
     })
@@ -64,15 +67,15 @@ const btn3 =document.getElementById("hotkey")
 //in pair with turn off, switch button and change status in bg
 function turnOn(){
     chrome.runtime.sendMessage({message: "Enabled"});
-    btn3.innerText = "ShortCut: Ctrl+Alt (status:on)";
-    chrome.storage.local.set({status: true});
+    btn3.innerText = textOn;
+    chrome.storage.session.set({status: true});
     btn3.onclick = turnOff;
 }
 
 function turnOff(){
     chrome.runtime.sendMessage({message: "Disabled"});
-    btn3.innerText = "ShortCut: Ctrl+Alt (status:off)";
-    chrome.storage.local.set({status: false});
+    btn3.innerText = textOff;
+    chrome.storage.session.set({status: false});
     btn3.onclick = turnOn;
 }
 

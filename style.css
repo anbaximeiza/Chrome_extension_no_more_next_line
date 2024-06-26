@@ -1,7 +1,6 @@
 html
 {
-    width: 450px;  /* max: 800px */
-    height: 300px; /* max: 600px */
+    width: 380px; /* max: 800px */
 }
 
 .actionButtons{
@@ -22,4 +21,8 @@ textarea::placeholder {
 
 #steps{
     margin: 0%;
+}
+
+#log{
+    margin-bottom: 2%;
 }
