@@ -14,7 +14,7 @@ async function editByTextArea(){
     textArea.select();
     console.log("I paste")
     document.execCommand("paste");
-    if (typeof textArea.value != 'string'){
+    if (textArea.value === ""){
         chrome.runtime.sendMessage({feedback:"NotStringError"});//send back to background
         return;
     }

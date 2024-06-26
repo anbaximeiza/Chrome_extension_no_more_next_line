@@ -14,7 +14,8 @@
         "clipboardWrite",
         "activeTab",
         "offscreen",
-        "storage"
+        "storage",
+        "tabs"
     ],
     "commands": {
         "process" : {
