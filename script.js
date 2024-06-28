@@ -12,6 +12,20 @@ document.addEventListener("DOMContentLoaded", function(){
             btn3.onclick=turnOn;
         }
     })
+
+    let checkB = document.getElementById("keepInput");
+    let keepStatus = chrome.storage.session.get("keepStatus", function(result){
+        if (result.keepStatus){
+            let rawText=document.getElementById("rawText");
+            checkB.checked = true;
+            tempText=chrome.storage.session.get("tempText", function(result){
+                if (result.tempText){
+                    rawText.value= result.tempText;
+                }   
+            })
+        }
+    })
+    
 })
 
 function textProcess(rawText){
@@ -50,11 +64,11 @@ function throwError(text){
     errorMsg.innerText = `${text}`;
 }
 
+const rawText=document.getElementById("rawText");
 
 //btn 1
 document.getElementById("from-web").addEventListener("click", function() {
-    var rawTextValue = document.getElementById("rawText").value;
-    document.getElementById("rawText").value=textProcess(rawTextValue);
+    rawText.value=textProcess(rawText.value);
 });
 //btn 2
 document.getElementById("from-clipboard").addEventListener("click", function() {
@@ -79,6 +93,27 @@ function turnOff(){
     btn3.onclick = turnOn;
 }
 
+//top right check box
+const checkB = document.getElementById("keepInput");
+checkB.addEventListener("change", switchCheck)
+
+function switchCheck(){
+    if (checkB.checked){
+        rawText.addEventListener("change",textStore);
+        chrome.storage.session.set({keepStatus:true});
+        chrome.storage.session.set({tempText:""})
+    } else{
+        rawText.removeEventListener("change",textStore)
+        chrome.storage.session.set({keepStatus:false});
+    }
+}
+
+function textStore(){
+    chrome.storage.session.set({tempText:rawText.value})
+}
+
+
+   
 
 
 

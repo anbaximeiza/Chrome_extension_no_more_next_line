@@ -1,5 +1,4 @@
 function badgeDisplay(message,actionResult){
-
     let color;
     let text;
     if (actionResult){
