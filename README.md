@@ -8,6 +8,8 @@ Simple! Just remove all those new line character in a given text, either from yo
 ### How to use it?
 ** will finish this part when upload to extension store
 
+** waiting for publish
+
 ### Privacy of my clipboard?
 Fortunately due to my lack of knowledge, there's not a single bit of database deploying knowledge I know of, and hence your clipboard is 100% safe. It's not likely for me to update this extension other fixing some bug later, plus the source code is just right above, feel free to see what's in there if in doubt.
 
